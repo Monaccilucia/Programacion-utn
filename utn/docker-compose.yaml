@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    image: matiasbasile/varcreative
+    container_name: test-app
+    restart: always
+    working_dir: /var/www/
+    volumes:
+      - .:/var/www
+
+  nginx:
+    image: matiasbasile/nginx:latest
+    container_name: test-nginx
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - .:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d/
+
+volumes:
+  test-data:
